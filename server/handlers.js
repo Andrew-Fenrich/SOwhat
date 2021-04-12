@@ -9,6 +9,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
+//function to get all active users
 const getUsers = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   try {
@@ -26,6 +27,8 @@ const getUsers = async (req, res) => {
     return res.status(500).json({ status: 500, message: err.message });
   }
 };
+
+//function to get a single user
 const getUser = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   const email = req.params.email;
@@ -46,6 +49,7 @@ const getUser = async (req, res) => {
   }
 };
 
+// function to get a list of factors for analysis
 const getFactor = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   try {
@@ -64,25 +68,37 @@ const getFactor = async (req, res) => {
   }
 };
 
-const addUserAvatar = async (req, res) => {
+// function to add a new user
+const addUser = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   try {
     await client.connect();
     const db = client.db();
     console.log("connected!");
-    console.log(req.body);
-    const _id = req.params._id;
-    console.log(_id);
-    const query = { _id };
-    const newValues = { $set: { ...req.body } };
-    let results = await db.collection("greetings").updateOne(query, newValues);
-    assert.equal(1, results.matchedCount);
-    assert.equal(1, results.modifiedCount);
+    await db
+      .collection("users")
+      .insertOne({ name: req.body.name, email: req.body.email, delete: false });
 
-    return res.status(200).json({ status: 200, newObject: results });
+    return res.status(201).json({ status: 201, message: "User added" });
   } catch (err) {
     console.log(err.stack);
-    res.status(500).json({ status: 500, data: req.body, message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+// function to add a SOwhat
+const addSoWhat = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db();
+    console.log("connected!");
+    await db.collection("SOwhats").insertOne(req.body);
+
+    return res.status(201).json({ status: 201, message: "SOwhat added" });
+  } catch (err) {
+    console.log(err.stack);
+    res.status(500).json({ status: 500, message: err.message });
   }
 };
 
@@ -90,5 +106,6 @@ module.exports = {
   getUsers,
   getUser,
   getFactor,
-  addUserAvatar,
+  addUser,
+  addSoWhat,
 };

@@ -3,7 +3,13 @@ const morgan = require("morgan");
 const multer = require("multer");
 const upload = multer({ dest: "./uploads/" });
 const fs = require("fs");
-const { getUsers, getFactor, getUser } = require("./handlers");
+const {
+  getUsers,
+  getFactor,
+  getUser,
+  addUser,
+  addSoWhat,
+} = require("./handlers");
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
 
@@ -25,12 +31,14 @@ express()
   // below allows for a static upload of assets within the server file//
   .use("/", express.static(__dirname + "/"))
 
-  // Endpoint to get all current users
+  // endpoint to get all current users
   .get("/users", getUsers)
-  // Endpoint to get a single current user
+  // endpoint to get a single current user
   .get("/users/:email", getUser)
   //endpoint to get planning factors
   .get("/factors", getFactor)
+  //endpoint to add a new user
+  .post("/users", addUser)
   //endpoint to upload user photo
   .post("/uploadUserAvatar", upload.single("avatar"), async (req, res) => {
     //fileTpye variable is the type of image file
@@ -58,13 +66,15 @@ express()
       let results = await db.collection("users").updateOne(query, newValues);
 
       return res
-        .status(200)
-        .json({ status: 202, message: "Upload successful" });
+        .status(201)
+        .json({ status: 201, message: "Upload successful" });
     } catch (err) {
       console.log(err.stack);
       res.status(500).json({ status: 500, message: err.message });
     }
   })
+  //endpoint to add SOwhat
+  .post("/SOwhat", addSoWhat)
 
   //Catch All Endpoint
   .get("*", (req, res) => {
