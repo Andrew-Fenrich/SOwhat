@@ -64,8 +64,31 @@ const getFactor = async (req, res) => {
   }
 };
 
+const addUserAvatar = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db();
+    console.log("connected!");
+    console.log(req.body);
+    const _id = req.params._id;
+    console.log(_id);
+    const query = { _id };
+    const newValues = { $set: { ...req.body } };
+    let results = await db.collection("greetings").updateOne(query, newValues);
+    assert.equal(1, results.matchedCount);
+    assert.equal(1, results.modifiedCount);
+
+    return res.status(200).json({ status: 200, newObject: results });
+  } catch (err) {
+    console.log(err.stack);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+};
+
 module.exports = {
   getUsers,
   getUser,
   getFactor,
+  addUserAvatar,
 };
