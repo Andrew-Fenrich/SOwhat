@@ -1,9 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
-const { getUsers } = require("./handlers");
+const { getUsers, getFactor, getUser } = require("./handlers");
 
-// const PORT = process.env.PORT || 8000;
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
+// const PORT = 8000;
 
 express()
   .use(morgan("tiny"))
@@ -15,6 +15,10 @@ express()
 
   // Endpoint to get all current users
   .get("/users", getUsers)
+  // Endpoint to get a single current user
+  .get("/users/:email", getUser)
+  //endpoint to get planning factors
+  .get("/factors", getFactor)
 
   //Catch All Endpoint
   .get("*", (req, res) => {
