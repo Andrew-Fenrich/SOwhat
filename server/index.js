@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const { getUsers } = require("./handlers");
 
 // const PORT = process.env.PORT || 8000;
 const PORT = 8000;
@@ -12,8 +13,10 @@ express()
   .use("/", express.static(__dirname + "/"))
   //   .use((req, res) => res.status(404).type("txt").send("🤷‍♂️"))
 
-  //Catch All Endpoint
+  // Endpoint to get all current users
+  .get("/users", getUsers)
 
+  //Catch All Endpoint
   .get("*", (req, res) => {
     res.status(404).json({
       status: 404,
