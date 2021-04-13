@@ -18,7 +18,6 @@ const getUsers = async (req, res) => {
     console.log("connected!");
 
     const users = await db.collection("users").find().toArray();
-    console.log(users);
 
     client.close();
     console.log("disconnected!");
@@ -39,7 +38,6 @@ const getUser = async (req, res) => {
     console.log("connected!");
 
     const user = await db.collection("users").findOne({ email: email });
-    console.log(user);
 
     client.close();
     console.log("disconnected!");
@@ -58,13 +56,31 @@ const getFactor = async (req, res) => {
     console.log("connected!");
 
     const factors = await db.collection("factors").find().toArray();
-    console.log(factors);
 
     client.close();
     console.log("disconnected!");
     return res.status(200).json({ status: 200, factors: factors });
   } catch (err) {
     return res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+// function to add a custom to existing list of planning factors
+const addFactor = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db();
+    console.log("connected!");
+    console.log(req.body);
+    const query = {};
+    const newValues = { $set: { ...req.body } };
+    await db.collection("factors").updateOne(query, newValues);
+
+    return res.status(200).json({ status: 200, message: "Factor added" });
+  } catch (err) {
+    console.log(err.stack);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
   }
 };
 
@@ -108,4 +124,5 @@ module.exports = {
   getFactor,
   addUser,
   addSoWhat,
+  addFactor,
 };

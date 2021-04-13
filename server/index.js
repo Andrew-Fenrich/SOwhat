@@ -9,6 +9,7 @@ const {
   getUser,
   addUser,
   addSoWhat,
+  addFactor,
 } = require("./handlers");
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
@@ -37,11 +38,13 @@ express()
   .get("/users/:email", getUser)
   //endpoint to get planning factors
   .get("/factors", getFactor)
+  //endpoint to patch and add new planning factor
+  .patch("/factors", addFactor)
   //endpoint to add a new user
   .post("/users", addUser)
   //endpoint to upload user photo
   .post("/uploadUserAvatar", upload.single("avatar"), async (req, res) => {
-    //fileTpye variable is the type of image file
+    //fileType variable is the type of image file
     let fileType = req.file.mimetype.split("/")[1];
     // newFileName is the name of the file and the file type to be shared in the
     let newFileName = req.file.filename + "." + fileType;
