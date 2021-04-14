@@ -9,6 +9,10 @@ const {
   getUser,
   addUser,
   addSoWhat,
+  addFactor,
+  getUserSOwhat,
+  deleteSOwhat,
+  deleteUser,
 } = require("./handlers");
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
@@ -35,13 +39,17 @@ express()
   .get("/users", getUsers)
   // endpoint to get a single current user
   .get("/users/:email", getUser)
+  //endpoint to SOFT delete user: it is a patch which changes delete flag from false to true, also used to reinstall user
+  .patch("/users/:email", deleteUser)
   //endpoint to get planning factors
   .get("/factors", getFactor)
+  //endpoint to patch and add new planning factor
+  .patch("/factors", addFactor)
   //endpoint to add a new user
   .post("/users", addUser)
   //endpoint to upload user photo
   .post("/uploadUserAvatar", upload.single("avatar"), async (req, res) => {
-    //fileTpye variable is the type of image file
+    //fileType variable is the type of image file
     let fileType = req.file.mimetype.split("/")[1];
     // newFileName is the name of the file and the file type to be shared in the
     let newFileName = req.file.filename + "." + fileType;
@@ -75,6 +83,10 @@ express()
   })
   //endpoint to add SOwhat
   .post("/SOwhat", addSoWhat)
+  //endpoing to get User SOwhats
+  .get("/SOwhat/:userId", getUserSOwhat)
+  // endpoint to delete SOwhat
+  .delete("/SOwhat/:_id", deleteSOwhat)
 
   //Catch All Endpoint
   .get("*", (req, res) => {
