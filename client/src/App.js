@@ -2,18 +2,16 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
+import LeftNav from "./LeftNav";
 
 function App() {
   return (
     <BrowserRouter>
       <GlobalStyles />
       <Wrapper>
-        <LeftNav>
-          <p>logo</p>
-          <p>DashBoard</p>
-          <p>SO!what</p>
-          <p>Settings</p>
-        </LeftNav>
+        <LeftNavPannel>
+          <LeftNav />
+        </LeftNavPannel>
         <Switch>
           <SwitchWrapper>
             <Route exact path="/">
@@ -47,18 +45,15 @@ const Wrapper = styled.div`
 
 const SwitchWrapper = styled.div`
   width: 68%;
-  background-color: #dcdce5;
-  border: 2px solid black;
+  background-color: #f5f5fb;
 `;
 
-const LeftNav = styled.nav`
+const LeftNavPannel = styled.nav`
   width: 12%;
   background-color: whitesmoke;
-  border: 2px solid blue;
 `;
 const RightNav = styled.nav`
   width: 20%;
   background-color: whitesmoke;
-  border: 2px solid red;
 `;
 export default App;
