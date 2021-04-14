@@ -47,7 +47,7 @@ const Wrapper = styled.div`
 
 const SwitchWrapper = styled.div`
   width: 68%;
-  background-color: #f5f5fb;
+  background-color: #dcdce5;
   border: 2px solid black;
 `;
 

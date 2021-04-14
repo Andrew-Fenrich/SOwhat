@@ -5,16 +5,16 @@ export default createGlobalStyle`
     *:after {
         box-sizing: border-box;
         -webkit-font-smoothing: antialiased;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
     :root {
-  --primary-color:  #666666;
+  --text-color:  #A2A2C2;
   --secondary-color: #1a1a1a;
   --accent-color: #ffd100;
 } 
 html, body {
     max-width: 100vw;
-    background: whitesmoke;
+    background: white;
 }
 html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -52,9 +52,9 @@ html, body, div, span, applet, object, iframe,
     }
     a {
         text-decoration: none;
-        color: var(--secondary-color);
+        color: var(--text-color);
         &:hover {
-            color: var(--accent-color)
+            color: black
         }
     }
 `;
