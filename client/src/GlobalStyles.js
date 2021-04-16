@@ -9,7 +9,7 @@ export default createGlobalStyle`
     }
     :root {
   --text-color:  #A2A2C2;
-  --secondary-color: #1a1a1a;
+  --support-color: #f5f5fb;
   --accent-color: #ffd100;
 } 
 html, body {

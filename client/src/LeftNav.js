@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { FiHome, FiBook, FiBookOpen, FiSettings } from "react-icons/fi";
 
 // variable to assist NavLink styling/finding which link is active
 const activeClassName = "nav-item-active";
@@ -15,10 +16,17 @@ const LeftNav = () => {
         <h2>SO!what</h2>
       </div>
       <StyledLink to="/" exact>
+        <FiHome />
         DashBoard
       </StyledLink>
-      <StyledLink to="/sowhat">SO!what</StyledLink>
-      <StyledLink to="/settings">Settings</StyledLink>
+      <StyledLink to="/sowhat">
+        <FiBookOpen />
+        SO!what
+      </StyledLink>
+      <StyledLink to="/settings">
+        <FiSettings />
+        Settings
+      </StyledLink>
     </Wrapper>
   );
 };

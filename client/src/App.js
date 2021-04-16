@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 import LeftNav from "./LeftNav";
+import RightNav from "./RightNav";
 
 function App() {
   return (
@@ -25,12 +26,9 @@ function App() {
             </Route>
           </SwitchWrapper>
         </Switch>
-        <RightNav>
-          <p>Logout</p>
-          <p>Photo</p>
-          <p>Top SO!whats</p>
-          <p>Reminders</p>
-        </RightNav>
+        <RightNavPannel>
+          <RightNav />
+        </RightNavPannel>
       </Wrapper>
     </BrowserRouter>
   );
@@ -52,7 +50,7 @@ const LeftNavPannel = styled.nav`
   width: 12%;
   background-color: whitesmoke;
 `;
-const RightNav = styled.nav`
+const RightNavPannel = styled.nav`
   width: 20%;
   background-color: whitesmoke;
 `;
