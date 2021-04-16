@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
+import { SignInUp } from "./SignInUp";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Switch>
           <SwitchWrapper>
             <Route exact path="/signin">
-              Signin
+              <SignInUp />
             </Route>
             <Route exact path="/">
               Dashboard
