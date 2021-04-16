@@ -15,6 +15,9 @@ function App() {
         </LeftNavPannel>
         <Switch>
           <SwitchWrapper>
+            <Route exact path="/signin">
+              Signin
+            </Route>
             <Route exact path="/">
               Dashboard
             </Route>
