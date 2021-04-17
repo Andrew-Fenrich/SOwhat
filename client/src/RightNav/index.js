@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiLogIn, FiLogOut, FiBell } from "react-icons/fi";
 import defaultImage from "../Assets/default-img.png";
@@ -6,8 +6,9 @@ import GlobalStyles from "../GlobalStyles";
 import { NavLink } from "react-router-dom";
 
 const RightNav = () => {
-  const user = "";
-  if (user === "") {
+  const user = localStorage.getItem("Current User");
+
+  if (user === null) {
     return (
       <Wrapper>
         <LogInOut>
@@ -38,7 +39,14 @@ const RightNav = () => {
     return (
       <Wrapper>
         <LogInOut>
-          <p>LogOut</p>
+          <NavLink
+            to="/"
+            onClick={() => {
+              localStorage.removeItem("Current User");
+            }}
+          >
+            LogOut
+          </NavLink>
           <FiLogOut />
         </LogInOut>
         <div>
