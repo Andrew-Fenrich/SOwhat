@@ -4,7 +4,8 @@ import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
-import { SignInUp } from "./SignInUp";
+import { SignIn } from "./SignIn";
+import { SignUp } from "./SignUp";
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
         <Switch>
           <SwitchWrapper>
             <Route exact path="/signin">
-              <SignInUp />
+              <SignIn />
+            </Route>
+            <Route exact path="/signup">
+              <SignUp />
             </Route>
             <Route exact path="/">
               Dashboard

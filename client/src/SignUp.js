@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 // import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-export const SignInUp = () => {
+export const SignUp = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
   const [user, setUser] = useState("");
   const history = useHistory();
   // const dispatch = useDispatch();
@@ -20,11 +22,31 @@ export const SignInUp = () => {
   const handlePasswordChange = (ev) => {
     setPasswordValue(ev.target.value);
   };
+  const handleConfirmPasswordChange = (ev) => {
+    setConfirmPasswordValue(ev.target.value);
+  };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    if (emailValue.includes("@") && passwordValue.length >= 6) {
+    if (
+      emailValue.includes("@") &&
+      passwordValue.length >= 6 &&
+      passwordValue === confirmPasswordValue
+    ) {
       // dispatch(getUser(emailValue));
+      fetch("/users", {
+        method: "POST",
+        body: JSON.stringify({ name: user, email: emailValue }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log("message:", json);
+        });
+
       localStorage.setItem("Current User Email", `${emailValue}`);
 
       history.push("/");
@@ -44,7 +66,7 @@ export const SignInUp = () => {
   return (
     <Wrapper>
       <Box>
-        <SectionTitle>Please Sign In</SectionTitle>
+        <SectionTitle>Please fill out the sign up form</SectionTitle>
         <SectionDiv>
           <div>
             <Label for="UserName">User Name</Label>
@@ -86,10 +108,22 @@ export const SignInUp = () => {
             />
           </div>
         </SectionDiv>
+        <SectionDiv>
+          <div>
+            <Label for="password">Confirm Password</Label>
+          </div>
+          <div>
+            <Input
+              type="password"
+              id="confirmPassword"
+              required
+              onChange={handleConfirmPasswordChange}
+            />
+          </div>
+        </SectionDiv>
         <SubmitBtn type="submit" onClick={handleSubmit}>
-          Log In
+          Sign Up
         </SubmitBtn>
-        <p>Don't have a SO!what account? Sign up</p>
       </Box>
     </Wrapper>
   );
@@ -152,7 +186,7 @@ const SubmitBtn = styled.button`
   background-color: #5e81f4;
   color: white;
   padding: 10px;
-  margin: 5px 20px 0 20px;
+  margin: 5px 20px 20px 20px;
   width: 100px;
   font-size: 16px;
   font-weight: bold;
