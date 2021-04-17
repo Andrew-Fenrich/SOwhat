@@ -3,16 +3,18 @@ import styled from "styled-components";
 import { FiLogIn, FiLogOut, FiBell } from "react-icons/fi";
 import defaultImage from "../Assets/default-img.png";
 import GlobalStyles from "../GlobalStyles";
+import { NavLink } from "react-router-dom";
 
 const RightNav = () => {
-  const [user, setUser] = useState("");
-
+  const user = "";
   if (user === "") {
     return (
       <Wrapper>
         <LogInOut>
-          <p>LogIn</p>
-          <FiLogIn />
+          <NavLink to="/signin">LogIn</NavLink>
+          <NavLink to="/signin">
+            <FiLogIn />
+          </NavLink>
         </LogInOut>
         <div>
           <UserImage src={defaultImage} alt="Default User Image" />
@@ -61,8 +63,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  div {
-  }
 `;
 const LogInOut = styled.div`
   display: flex;
