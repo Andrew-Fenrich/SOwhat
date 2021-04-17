@@ -4,9 +4,27 @@ import { FiLogIn, FiLogOut, FiBell } from "react-icons/fi";
 import defaultImage from "../Assets/default-img.png";
 import GlobalStyles from "../GlobalStyles";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getUser } from "../actions";
 
-const RightNav = () => {
+const RightNav = ({ flag }) => {
   const user = localStorage.getItem("Current User");
+  console.log(user);
+  const dispatch = useDispatch();
+
+  const userState = useSelector((state) => {
+    return state.user;
+  });
+
+  const logOutHandler = () => {
+    localStorage.removeItem("Current User");
+    dispatch(getUser());
+  };
+  // console.log(flag);
+  // useEffect(() => {
+  //   console.log(userState);
+  // }, [flag]);
 
   if (user === null) {
     return (
@@ -39,12 +57,7 @@ const RightNav = () => {
     return (
       <Wrapper>
         <LogInOut>
-          <NavLink
-            to="/"
-            onClick={() => {
-              localStorage.removeItem("Current User");
-            }}
-          >
+          <NavLink to="/" onClick={logOutHandler}>
             LogOut
           </NavLink>
           <FiLogOut />

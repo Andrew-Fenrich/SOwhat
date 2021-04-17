@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { getUser } from "./actions";
 
-export const SignIn = () => {
+export const SignIn = ({ setFlag, flag }) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [user, setUser] = useState("");
@@ -25,7 +25,7 @@ export const SignIn = () => {
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-
+    setFlag(!flag);
     fetch(`/user/${emailValue}`)
       .then((res) => res.json())
       .then((json) => {
