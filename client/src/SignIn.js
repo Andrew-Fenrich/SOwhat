@@ -122,7 +122,7 @@ const Wrapper = styled.main`
 
 const Box = styled.form`
   width: 400px;
-  box-shadow: 0 5px 5px #000;
+  /* box-shadow: 0 5px 5px #000; */
   border: 3px solid #5e81f4;
   border-radius: 8px;
   margin: 20px;

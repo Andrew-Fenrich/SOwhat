@@ -64,7 +64,7 @@ export const SignUp = () => {
   return (
     <Wrapper>
       <Box>
-        <SectionTitle>Please fill out the sign up form</SectionTitle>
+        <SectionTitle>Please Sign Up</SectionTitle>
         <SectionDiv>
           <div>
             <Label for="UserName">User Name</Label>
@@ -131,14 +131,14 @@ const Wrapper = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 95px);
+  /* height: calc(100vh); */
   background-color: #f5f5fb;
 `;
 
 const Box = styled.form`
   width: 400px;
-  box-shadow: 0 5px 5px #000;
-  border: 3px solid #5e81f4;
+  /* box-shadow: 0 5px 5px #000; */
+  border: 5px solid #5e81f4;
   border-radius: 8px;
   margin: 20px;
   padding: 30px;
