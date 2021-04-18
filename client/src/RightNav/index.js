@@ -16,12 +16,19 @@ const RightNav = ({ flag }) => {
   let userState = useSelector((state) => {
     return state.user;
   });
-  console.log(userState);
-
+  let profilePicture = userState.imgUrl;
+  console.log(profilePicture);
   const logOutHandler = () => {
     localStorage.removeItem("Current User");
     dispatch(
-      getUser({ user: "", _id: "", name: "", delete: "", status: "no user" })
+      getUser({
+        user: "",
+        _id: "",
+        name: "",
+        delete: "",
+        imgUrl: "",
+        status: "no user",
+      })
     );
   };
 
@@ -68,7 +75,10 @@ const RightNav = ({ flag }) => {
           <FiLogOut />
         </LogInOut>
         <div>
-          <UserImage src={defaultImage} alt="Default User Image" />
+          <UserImage
+            src={profilePicture ? profilePicture : defaultImage}
+            alt="Default User Image"
+          />
           <h2>{userState.name}</h2>
         </div>
         <ContentWrapper>

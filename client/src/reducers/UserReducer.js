@@ -3,6 +3,7 @@ const initialState = {
   _id: "",
   name: "",
   delete: "",
+  imgUrl: "",
   status: "no user",
 };
 
@@ -16,6 +17,7 @@ export default function userReducer(state = initialState, action) {
         name: `${action.user.name}`,
         email: `${action.user.email}`,
         delete: `${action.user.delete}`,
+        imgUrl: `${action.user.imgUrl}`,
       };
     }
 
