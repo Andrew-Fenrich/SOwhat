@@ -2,31 +2,36 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiLogIn, FiLogOut, FiBell } from "react-icons/fi";
 import defaultImage from "../Assets/default-img.png";
-import GlobalStyles from "../GlobalStyles";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getUser } from "../actions";
+import { getUser, logOut } from "../actions";
 
 const RightNav = ({ flag }) => {
-  const user = localStorage.getItem("Current User");
-  console.log(user);
   const dispatch = useDispatch();
+  const [localUser, setLocalUser] = useState(
+    JSON.parse(localStorage.getItem("Current User")) || ""
+  );
 
-  const userState = useSelector((state) => {
+  let userState = useSelector((state) => {
     return state.user;
   });
+  console.log(userState);
 
   const logOutHandler = () => {
     localStorage.removeItem("Current User");
-    dispatch(getUser());
+    dispatch(
+      getUser({ user: "", _id: "", name: "", delete: "", status: "no user" })
+    );
   };
-  // console.log(flag);
-  // useEffect(() => {
-  //   console.log(userState);
-  // }, [flag]);
 
-  if (user === null) {
+  useEffect(() => {
+    console.log(userState);
+    console.log(localUser);
+    console.log(flag);
+  }, [logOutHandler]);
+
+  if (userState.user === "" && localUser === "") {
     return (
       <Wrapper>
         <LogInOut>
@@ -37,7 +42,7 @@ const RightNav = ({ flag }) => {
         </LogInOut>
         <div>
           <UserImage src={defaultImage} alt="Default User Image" />
-          <h2>Random User</h2>
+          {/* <h2>Random User</h2> */}
         </div>
         <ContentWrapper>
           <p>Content</p>
@@ -64,7 +69,7 @@ const RightNav = ({ flag }) => {
         </LogInOut>
         <div>
           <UserImage src={defaultImage} alt="Default User Image" />
-          <h2>Random User</h2>
+          <h2>{userState.name}</h2>
         </div>
         <ContentWrapper>
           <p>Content</p>
