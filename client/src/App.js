@@ -6,6 +6,7 @@ import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
+import Dashboard from "./Dashboard";
 
 function App() {
   const [flag, setFlag] = useState(false);
@@ -25,7 +26,7 @@ function App() {
               <SignUp />
             </Route>
             <Route exact path="/">
-              Dashboard
+              <Dashboard />
             </Route>
             <Route exact path="/sowhat">
               So What
