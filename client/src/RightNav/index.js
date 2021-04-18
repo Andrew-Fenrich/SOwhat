@@ -47,10 +47,10 @@ const RightNav = ({ flag }) => {
             <FiLogIn />
           </NavLink>
         </LogInOut>
-        <div>
+        <PhotoUser>
           <UserImage src={defaultImage} alt="Default User Image" />
           {/* <h2>Random User</h2> */}
-        </div>
+        </PhotoUser>
         <ContentWrapper>
           <p>Content</p>
           <p>Content</p>
@@ -74,13 +74,13 @@ const RightNav = ({ flag }) => {
           </NavLink>
           <FiLogOut />
         </LogInOut>
-        <div>
+        <PhotoUser>
           <UserImage
             src={profilePicture ? profilePicture : defaultImage}
             alt="Default User Image"
           />
           <h2>{userState.name}</h2>
-        </div>
+        </PhotoUser>
         <ContentWrapper>
           <p>Content</p>
         </ContentWrapper>
@@ -123,10 +123,15 @@ const ReminderWrapper = styled.div`
   width: 100%;
 `;
 const UserImage = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   border: 2px solid #f5f5fb;
+`;
+const PhotoUser = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default RightNav;
