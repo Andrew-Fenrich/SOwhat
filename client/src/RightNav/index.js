@@ -51,18 +51,6 @@ const RightNav = ({ flag }) => {
           <UserImage src={defaultImage} alt="Default User Image" />
           {/* <h2>Random User</h2> */}
         </PhotoUser>
-        <ContentWrapper>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-          <p>Content</p>
-        </ContentWrapper>
-        <ReminderWrapper>
-          <Reminder>
-            <p>Reminder</p>
-            <FiBell />
-          </Reminder>
-        </ReminderWrapper>
       </Wrapper>
     );
   } else {
