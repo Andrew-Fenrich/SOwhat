@@ -47,9 +47,7 @@ export const SignUp = () => {
           console.log("message:", json);
         });
 
-      localStorage.setItem("Current User Email", `${emailValue}`);
-
-      history.push("/");
+      history.push("/signin");
     } else {
       alert("Invalid credentials");
       console.error("This member does not exist.");

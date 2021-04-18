@@ -1,13 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiLogIn, FiLogOut, FiBell } from "react-icons/fi";
 import defaultImage from "../Assets/default-img.png";
-import GlobalStyles from "../GlobalStyles";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getUser, logOut } from "../actions";
 
-const RightNav = () => {
-  const user = "";
-  if (user === "") {
+const RightNav = ({ flag }) => {
+  const dispatch = useDispatch();
+  const [localUser, setLocalUser] = useState(
+    JSON.parse(localStorage.getItem("Current User")) || ""
+  );
+
+  let userState = useSelector((state) => {
+    return state.user;
+  });
+  let profilePicture = userState.imgUrl;
+  console.log(profilePicture);
+  const logOutHandler = () => {
+    localStorage.removeItem("Current User");
+    dispatch(
+      getUser({
+        user: "",
+        _id: "",
+        name: "",
+        delete: "",
+        imgUrl: "",
+        status: "no user",
+      })
+    );
+  };
+
+  useEffect(() => {
+    console.log(userState);
+    console.log(localUser);
+    console.log(flag);
+  }, [logOutHandler]);
+
+  if (userState.user === "" && localUser === "") {
     return (
       <Wrapper>
         <LogInOut>
@@ -18,7 +49,7 @@ const RightNav = () => {
         </LogInOut>
         <div>
           <UserImage src={defaultImage} alt="Default User Image" />
-          <h2>Random User</h2>
+          {/* <h2>Random User</h2> */}
         </div>
         <ContentWrapper>
           <p>Content</p>
@@ -38,12 +69,17 @@ const RightNav = () => {
     return (
       <Wrapper>
         <LogInOut>
-          <p>LogOut</p>
+          <NavLink to="/" onClick={logOutHandler}>
+            LogOut
+          </NavLink>
           <FiLogOut />
         </LogInOut>
         <div>
-          <UserImage src={defaultImage} alt="Default User Image" />
-          <h2>Random User</h2>
+          <UserImage
+            src={profilePicture ? profilePicture : defaultImage}
+            alt="Default User Image"
+          />
+          <h2>{userState.name}</h2>
         </div>
         <ContentWrapper>
           <p>Content</p>

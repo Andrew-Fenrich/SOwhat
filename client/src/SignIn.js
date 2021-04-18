@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { getUser } from "./actions";
 
-export const SignIn = () => {
+export const SignIn = ({ setFlag, flag }) => {
+  //Setting State for input fields
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [user, setUser] = useState("");
   const history = useHistory();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
+  // handler functions for input fields
   const handleUserName = (ev) => {
     setUser(ev.target.value);
   };
@@ -24,16 +27,28 @@ export const SignIn = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    if (emailValue.includes("@") && passwordValue.length >= 6) {
-      // dispatch(getUser(emailValue));
-      localStorage.setItem("Current User Email", `${emailValue}`);
+    fetch(`/user/${emailValue}`)
+      .then((res) => res.json())
+      .then((json) => {
+        let activeUser = json.user;
+        if (
+          emailValue.includes("@") &&
+          passwordValue.length >= 6 &&
+          user.toLowerCase() === activeUser.name.toLowerCase()
+        ) {
+          console.log("User Signed In");
+          localStorage.removeItem("Current User");
+          localStorage.setItem("Current User", JSON.stringify(json.user));
+          activeUser = JSON.parse(localStorage.getItem("Current User"));
+          dispatch(getUser(json.user));
+          history.push("/");
+        } else {
+          alert("Invalid credentials");
+          console.error("This member does not exist.");
+        }
+      });
 
-      history.push("/");
-    } else {
-      alert("Invalid credentials");
-      console.error("This member does not exist.");
-    }
-    return setEmailValue("") && setPasswordValue("");
+    return setEmailValue("") && setPasswordValue(""), setFlag(!flag);
   };
 
   // focus on input on load
@@ -69,7 +84,6 @@ export const SignIn = () => {
               type="text"
               id="email"
               required
-              ref={ref}
               onChange={handleEmailChange}
             />
           </div>

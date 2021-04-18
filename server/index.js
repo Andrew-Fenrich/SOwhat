@@ -38,7 +38,7 @@ express()
   // endpoint to get all current users
   .get("/users", getUsers)
   // endpoint to get a single current user
-  .get("/users/:email", getUser)
+  .get("/user/:email", getUser)
   //endpoint to SOFT delete user: it is a patch which changes delete flag from false to true, also used to reinstall user
   .patch("/users/:email", deleteUser)
   //endpoint to get planning factors

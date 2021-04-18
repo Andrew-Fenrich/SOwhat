@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
@@ -8,6 +8,7 @@ import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 
 function App() {
+  const [flag, setFlag] = useState(false);
   return (
     <BrowserRouter>
       <GlobalStyles />
@@ -18,7 +19,7 @@ function App() {
         <Switch>
           <SwitchWrapper>
             <Route exact path="/signin">
-              <SignIn />
+              <SignIn setFlag={setFlag} flag={flag} />
             </Route>
             <Route exact path="/signup">
               <SignUp />
@@ -35,7 +36,7 @@ function App() {
           </SwitchWrapper>
         </Switch>
         <RightNavPannel>
-          <RightNav />
+          <RightNav flag={flag} />
         </RightNavPannel>
       </Wrapper>
     </BrowserRouter>
