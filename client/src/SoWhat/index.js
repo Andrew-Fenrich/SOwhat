@@ -116,31 +116,35 @@ const SoWhat = () => {
 
   if (factor !== "") {
     return (
-      <form>
+      <FormWrapper>
         {/* -----------------------------Who Block------------------------------------ */}
-        <div id="whoBlock">
+        <WhoBlockStyle id="whoBlock">
           <div>
-            <label for="Who">Who is this for?</label>
-            <input
-              type="text"
-              id="whoFor"
-              value={whoIsThisFor}
-              onChange={handleIdeaWhoFor}
-            />
+            <div>
+              <label for="Who">Who is this for?</label>
+              <input
+                type="text"
+                id="whoFor"
+                value={whoIsThisFor}
+                onChange={handleIdeaWhoFor}
+              />
+            </div>
+            <div>
+              <label for="Need Help WHO">Need Some Ideas?</label>
+              <select id="whoFor" name="whoFor" onChange={handleIdeaWhoFor}>
+                <option>Please Select an option</option>
+                {factor.whoFor.map((input) => (
+                  <option value={input}>{input}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div>
             <button onClick={handleUnhideWhat}>SO!what</button>
           </div>
-          <div>
-            <label for="Need Help WHO">Need Some Ideas?</label>
-            <select id="whoFor" name="whoFor" onChange={handleIdeaWhoFor}>
-              <option>Please Select an option</option>
-              {factor.whoFor.map((input) => (
-                <option value={input}>{input}</option>
-              ))}
-            </select>
-          </div>
-        </div>
+        </WhoBlockStyle>
         {/* ------------------------------What Block-------------------------------- */}
-        <div id="whatBlock" hidden={showBlockWhat}>
+        <WhatBlockStyle id="whatBlock" hidden={showBlockWhat}>
           <div>
             <p>
               <strong>SO!</strong>
@@ -154,9 +158,9 @@ const SoWhat = () => {
             />
             <button onClick={handleUnhideWhere}>SO!what</button>
           </div>
-        </div>
+        </WhatBlockStyle>
         {/* ------------------------------Where Block-------------------------------- */}
-        <div id="whereBlock" hidden={showBlockWhere}>
+        <WhereBlockStyle id="whereBlock" hidden={showBlockWhere}>
           <div>
             <p>
               <strong>SO!</strong>
@@ -170,9 +174,9 @@ const SoWhat = () => {
             />
             <button onClick={handleUnhideWhen}>SO!what</button>
           </div>
-        </div>
+        </WhereBlockStyle>
         {/* ------------------------------When Block-------------------------------- */}
-        <div id="whenBlock" hidden={showBlockWhen}>
+        <WhenBlockStyle id="whenBlock" hidden={showBlockWhen}>
           <div>
             <p>
               <strong>SO!</strong>
@@ -195,9 +199,9 @@ const SoWhat = () => {
               ))}
             </select>
           </div>
-        </div>
+        </WhenBlockStyle>
         {/* ------------------------------Why Block-------------------------------- */}
-        <div id="whyBlock" hidden={showBlockWhy}>
+        <WhyBlockStyle id="whyBlock" hidden={showBlockWhy}>
           <div>
             <p>
               <strong>SO!</strong>
@@ -211,7 +215,7 @@ const SoWhat = () => {
             />
             <button onClick={handleUnhideSubmit}>SO!what</button>
           </div>
-        </div>
+        </WhyBlockStyle>
         {/*--------------------------- Submit Block------------------------------ */}
         <div id="SubmitBlock" hidden={showBlockSubmit}>
           <button
@@ -222,11 +226,51 @@ const SoWhat = () => {
             Make It So
           </button>
         </div>
-      </form>
+      </FormWrapper>
     );
   } else {
     return <p>loading</p>;
   }
 };
+
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+`;
+
+const WhoBlockStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: 15%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 17px;
+  background: #ff808b;
+  color: whitesmoke;
+`;
+const WhatBlockStyle = styled.div`
+  border: 2px solid blue;
+  width: 80%;
+  height: 15%;
+`;
+const WhereBlockStyle = styled.div`
+  border: 2px solid pink;
+  width: 80%;
+  height: 15%;
+`;
+const WhenBlockStyle = styled.div`
+  border: 2px solid green;
+  width: 80%;
+  height: 15%;
+`;
+const WhyBlockStyle = styled.div`
+  border: 2px solid yellow;
+  width: 80%;
+  height: 15%;
+`;
 
 export default SoWhat;
