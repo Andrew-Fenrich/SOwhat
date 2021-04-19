@@ -12,6 +12,7 @@ const SoWhat = () => {
 
   // Component Level State-------
   const [factor, setFactor] = useState("");
+  const [soWhatName, setSoWhatName] = useState("");
 
   // State for Who block--------
   const [whoIsThisFor, setWhoIsThisFor] = useState("");
@@ -42,6 +43,9 @@ const SoWhat = () => {
   // handler functions will be divided by  form block //
 
   // handlers and functions for Who block---------
+  const handleSoWhatName = (ev) => {
+    setSoWhatName(ev.target.value);
+  };
   const handleIdeaWhoFor = (ev) => {
     setWhoIsThisFor(ev.target.value);
   };
@@ -89,6 +93,7 @@ const SoWhat = () => {
       method: "POST",
       body: JSON.stringify({
         userId: userState._id,
+        soWhatName: soWhatName,
         who: whoIsThisFor,
         what: whatIsThisFor,
         where: whereIsThis,
@@ -119,7 +124,16 @@ const SoWhat = () => {
       <FormWrapper>
         {/* -----------------------------Who Block------------------------------------ */}
         <WhoBlockStyle id="whoBlock">
-          <div>
+          <WhoInputBlock>
+            <div>
+              <label for="soWhatName">Give this SO!what a name</label>
+              <input
+                type="text"
+                id="soWhatName"
+                value={soWhatName}
+                onChange={handleSoWhatName}
+              />
+            </div>
             <div>
               <label for="Who">Who is this for?</label>
               <input
@@ -138,93 +152,114 @@ const SoWhat = () => {
                 ))}
               </select>
             </div>
-          </div>
-          <div>
+          </WhoInputBlock>
+          <WhoButtonBlock>
             <button onClick={handleUnhideWhat}>SO!what</button>
-          </div>
+          </WhoButtonBlock>
         </WhoBlockStyle>
         {/* ------------------------------What Block-------------------------------- */}
-        <WhatBlockStyle id="whatBlock" hidden={showBlockWhat}>
-          <div>
+
+        <WhatBlockStyle hidden={showBlockWhat}>
+          <WhatInputBlock>
             <p>
               <strong>SO!</strong>
             </p>
-            <label for="What">What would you like to do?</label>
-            <input
-              type="text"
-              id="What"
-              value={whatIsThisFor}
-              onChange={handleIdeaWhatFor}
-            />
+            <div>
+              <label for="What">What would you like to do?</label>
+              <input
+                type="text"
+                id="What"
+                value={whatIsThisFor}
+                onChange={handleIdeaWhatFor}
+              />
+            </div>
+          </WhatInputBlock>
+
+          <WhatButtonBlock>
             <button onClick={handleUnhideWhere}>SO!what</button>
-          </div>
+          </WhatButtonBlock>
         </WhatBlockStyle>
+
         {/* ------------------------------Where Block-------------------------------- */}
         <WhereBlockStyle id="whereBlock" hidden={showBlockWhere}>
-          <div>
+          <WhereInputBlock>
             <p>
               <strong>SO!</strong>
             </p>
-            <label for="Where">Where would you like to do this?</label>
-            <input
-              type="text"
-              id="Where"
-              value={whereIsThis}
-              onChange={handleIdeaWhere}
-            />
+            <div>
+              <label for="Where">Where would you like to do this?</label>
+              <input
+                type="text"
+                id="Where"
+                value={whereIsThis}
+                onChange={handleIdeaWhere}
+              />
+            </div>
+          </WhereInputBlock>
+          <WhereButtonBlock>
             <button onClick={handleUnhideWhen}>SO!what</button>
-          </div>
+          </WhereButtonBlock>
         </WhereBlockStyle>
         {/* ------------------------------When Block-------------------------------- */}
         <WhenBlockStyle id="whenBlock" hidden={showBlockWhen}>
-          <div>
-            <p>
-              <strong>SO!</strong>
-            </p>
-            <label for="When">When must this be acomplished?</label>
-            <input
-              type="text"
-              id="When"
-              value={whenIsThis}
-              onChange={handleIdeaWhen}
-            />
+          <WhenInputBlock>
+            <div>
+              <p>
+                <strong>SO!</strong>
+              </p>
+            </div>
+            <div>
+              <label for="When">When must this be acomplished?</label>
+              <input
+                type="text"
+                id="When"
+                value={whenIsThis}
+                onChange={handleIdeaWhen}
+              />
+            </div>
+            <div>
+              <label for="Need Help WHO">Need Some Ideas?</label>
+              <select id="whenFor" name="whenFor" onChange={handleIdeaWhen}>
+                <option>Please Select an option</option>
+                {factor.time.map((input) => (
+                  <option value={input}>{input}</option>
+                ))}
+              </select>
+            </div>
+          </WhenInputBlock>
+          <WhenButtonBlock>
             <button onClick={handleUnhideWhy}>SO!what</button>
-          </div>
-          <div>
-            <label for="Need Help WHO">Need Some Ideas?</label>
-            <select id="whenFor" name="whenFor" onChange={handleIdeaWhen}>
-              <option>Please Select an option</option>
-              {factor.time.map((input) => (
-                <option value={input}>{input}</option>
-              ))}
-            </select>
-          </div>
+          </WhenButtonBlock>
         </WhenBlockStyle>
         {/* ------------------------------Why Block-------------------------------- */}
         <WhyBlockStyle id="whyBlock" hidden={showBlockWhy}>
-          <div>
+          <WhyInputBlock>
             <p>
               <strong>SO!</strong>
             </p>
-            <label for="Why">Why would you like to do this?</label>
-            <input
-              type="text"
-              id="Why"
-              value={whyIsThis}
-              onChange={handleIdeaWhy}
-            />
+            <div>
+              <label for="Why">Why would you like to do this?</label>
+              <input
+                type="text"
+                id="Why"
+                value={whyIsThis}
+                onChange={handleIdeaWhy}
+              />
+            </div>
+          </WhyInputBlock>
+          <WhyButtonBlock>
             <button onClick={handleUnhideSubmit}>SO!what</button>
-          </div>
+          </WhyButtonBlock>
         </WhyBlockStyle>
         {/*--------------------------- Submit Block------------------------------ */}
         <div id="SubmitBlock" hidden={showBlockSubmit}>
-          <button
+          <SubmitButton
             onClick={(ev) => {
               handleSubmit(ev);
             }}
           >
             Make It So
-          </button>
+          </SubmitButton>
         </div>
       </FormWrapper>
     );
@@ -233,6 +268,9 @@ const SoWhat = () => {
   }
 };
 
+//---------------------------------- Styling-----------------------------------//
+
+//-----------Formstyling---------------
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
@@ -241,6 +279,7 @@ const FormWrapper = styled.form`
   height: 100%;
 `;
 
+// Who Block Styling------------------
 const WhoBlockStyle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -252,25 +291,301 @@ const WhoBlockStyle = styled.div`
   background: #ff808b;
   color: whitesmoke;
 `;
+const WhoInputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  input {
+    margin-left: 35px;
+    border-radius: 17px;
+    border: none;
+    width: 200px;
+    &:focus {
+      outline: none;
+    }
+  }
+  select {
+    border-radius: 17px;
+    border: none;
+    margin-left: 5px;
+    width: 200px;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+const WhoButtonBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin-right: 50px;
+  button {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background: #9698d6;
+    font-weight: bold;
+    border: 5px solid white;
+    color: white;
+    &:hover {
+      background: white;
+      color: black;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+// What Block Styling-------------
 const WhatBlockStyle = styled.div`
-  border: 2px solid blue;
+  display: ${(props) => (props.hidden ? "none" : "flex")};
+  justify-content: space-between;
   width: 80%;
   height: 15%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 17px;
+  background: #9698d6;
+  color: whitesmoke;
 `;
+const WhatInputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  p {
+    font-size: 25px;
+  }
+  input {
+    margin-left: 5px;
+    border-radius: 17px;
+    border: none;
+    width: 400px;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+const WhatButtonBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin-right: 50px;
+  button {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background: #ff808b;
+    font-weight: bold;
+    border: 5px solid white;
+    color: white;
+    &:hover {
+      background: white;
+      color: black;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+//Where Block Styling------------
 const WhereBlockStyle = styled.div`
-  border: 2px solid pink;
+  display: ${(props) => (props.hidden ? "none" : "flex")};
+  justify-content: space-between;
   width: 80%;
   height: 15%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 17px;
+  background: #ff808b;
+  color: whitesmoke;
 `;
+const WhereInputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  p {
+    font-size: 25px;
+  }
+  input {
+    margin-left: 5px;
+    border-radius: 17px;
+    border: none;
+    width: 350px;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+const WhereButtonBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin-right: 50px;
+  button {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background: #9698d6;
+    font-weight: bold;
+    border: 5px solid white;
+    color: white;
+    &:hover {
+      background: white;
+      color: black;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+//When Block Style -------------
 const WhenBlockStyle = styled.div`
-  border: 2px solid green;
+  display: ${(props) => (props.hidden ? "none" : "flex")};
+  justify-content: space-between;
   width: 80%;
   height: 15%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 17px;
+  background: #9698d6;
+  color: whitesmoke;
 `;
+
+const WhenInputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  p {
+    font-size: 25px;
+  }
+  input {
+    margin-left: 5px;
+    border-radius: 17px;
+    border: none;
+    width: 350px;
+    &:focus {
+      outline: none;
+    }
+  }
+  select {
+    border-radius: 17px;
+    border: none;
+    margin-left: 5px;
+    width: 200px;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+const WhenButtonBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin-right: 50px;
+  button {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background: #ff808b;
+    font-weight: bold;
+    border: 5px solid white;
+    color: white;
+    &:hover {
+      background: white;
+      color: black;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+// Why Block style-------------
 const WhyBlockStyle = styled.div`
-  border: 2px solid yellow;
+  display: ${(props) => (props.hidden ? "none" : "flex")};
+  justify-content: space-between;
   width: 80%;
   height: 15%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 17px;
+  background: #ff808b;
+  color: whitesmoke;
+`;
+const WhyInputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  p {
+    font-size: 25px;
+  }
+  input {
+    margin-left: 5px;
+    border-radius: 17px;
+    border: none;
+    width: 350px;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+const WhyButtonBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin-right: 50px;
+  button {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background: #9698d6;
+    font-weight: bold;
+    border: 5px solid white;
+    color: white;
+    &:hover {
+      background: white;
+      color: black;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+// Submit Button style--------
+const SubmitButton = styled.button`
+  margin-top: 5px;
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  background: #4d4cac;
+  border: 5px solid #f7e5e9;
+  color: #f7e5e9;
+  &:hover {
+    background: whitesmoke;
+    color: #ff808b;
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default SoWhat;
