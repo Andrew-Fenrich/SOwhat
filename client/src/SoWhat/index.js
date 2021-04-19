@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import thinking from "../Assets/undraw_Code_thinking_re_gka2.svg";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 const SoWhat = () => {
+  // Utility variables-----------
+  const history = useHistory();
+  let userState = useSelector((state) => {
+    return state.user;
+  });
+
   // Component Level State-------
   const [factor, setFactor] = useState("");
 
@@ -75,9 +81,37 @@ const SoWhat = () => {
     ev.preventDefault();
     setShowBlockSubmit(!showBlockSubmit);
   };
+  // handler for submit block
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+
+    fetch("/SOwhat", {
+      method: "POST",
+      body: JSON.stringify({
+        userId: userState._id,
+        who: whoIsThisFor,
+        what: whatIsThisFor,
+        where: whereIsThis,
+        When: whenIsThis,
+        why: whyIsThis,
+        flag: false,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log("message:", json);
+      });
+
+    history.push("/");
+  };
 
   //-----------console log block for testing: delete if not required----------//
   console.log(factor);
+  console.log(userState._id);
   //----------^^ this should be emply on production--------------------------//
 
   if (factor !== "") {
@@ -180,7 +214,13 @@ const SoWhat = () => {
         </div>
         {/*--------------------------- Submit Block------------------------------ */}
         <div id="SubmitBlock" hidden={showBlockSubmit}>
-          <input type="submit" value="Make It So" />
+          <button
+            onClick={(ev) => {
+              handleSubmit(ev);
+            }}
+          >
+            Make It So
+          </button>
         </div>
       </form>
     );
