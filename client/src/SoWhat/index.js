@@ -115,8 +115,6 @@ const SoWhat = () => {
   };
 
   //-----------console log block for testing: delete if not required----------//
-  console.log(factor);
-  console.log(userState._id);
   //----------^^ this should be emply on production--------------------------//
 
   if (factor !== "") {
