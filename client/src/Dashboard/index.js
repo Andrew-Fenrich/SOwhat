@@ -15,8 +15,8 @@ const Dashboard = () => {
         <WelcomeDashboard>
           <h2>Welcome! Please LogIn or SignUp</h2>
           <p>
-            Welcome to SO!what. SO!what is an orginisational tool that will help
-            you complete tasks quickly and think through ideas step-by-step.{" "}
+            Welcome to SO!what. SO!what is an organizational tool that will help
+            you complete tasks quickly and think through ideas step-by-step.
             <strong>SO!what</strong> We are humbled that you want to try our
             product and want to invite you to sign up below.
           </p>

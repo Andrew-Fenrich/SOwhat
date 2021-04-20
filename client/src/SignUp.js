@@ -88,7 +88,6 @@ export const SignUp = () => {
               type="text"
               id="email"
               required
-              ref={ref}
               onChange={handleEmailChange}
             />
           </div>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
+import SoWhat from "./SoWhat";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 import Dashboard from "./Dashboard";
@@ -29,7 +30,7 @@ function App() {
               <Dashboard />
             </Route>
             <Route exact path="/sowhat">
-              So What
+              <SoWhat />
             </Route>
             <Route exact path="/settings">
               Settings
