@@ -38,7 +38,7 @@ const RightNav = ({ flag }) => {
     console.log(flag);
   }, [logOutHandler]);
 
-  if (userState.user === "" && localUser === "") {
+  if (userState.user === "") {
     return (
       <Wrapper>
         <LogInOut>
@@ -64,7 +64,7 @@ const RightNav = ({ flag }) => {
         </LogInOut>
         <PhotoUser>
           <UserImage
-            src={profilePicture ? profilePicture : defaultImage}
+            src={profilePicture === "undefined" ? defaultImage : profilePicture}
             alt="Default User Image"
           />
           <h2>{userState.name}</h2>
