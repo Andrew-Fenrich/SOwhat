@@ -143,6 +143,7 @@ const AboutUs = styled.div`
 const StyledLink = styled(Link)`
   color: #ff808b;
   padding-right: 2px;
+  padding-left: 2px;
 `;
 //Signed in style-------------------
 const WelcomeDashboard = styled.div`
