@@ -19,7 +19,7 @@ const Dashboard = ({ flag, setFlag }) => {
       .then((json) => {
         setUserSoWhat(json.SOwhats);
       });
-  }, [flag]);
+  }, [flag, user._id]);
   //-------------console.log block: delete on production-----------------------//
   console.log("This is the current User in Dashboard:", user);
   console.log(
@@ -93,7 +93,6 @@ const Dashboard = ({ flag, setFlag }) => {
           <div>
             <h3> ❕{lastSoWhat.soWhatName}</h3>
             <p>
-              {" "}
               <span>Who:</span> {lastSoWhat.who}
             </p>
             <p>
