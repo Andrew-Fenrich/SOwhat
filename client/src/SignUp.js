@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 
 export const SignUp = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -10,7 +8,6 @@ export const SignUp = () => {
   const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
   const [user, setUser] = useState("");
   const history = useHistory();
-  // const dispatch = useDispatch();
 
   const handleUserName = (ev) => {
     setUser(ev.target.value);
@@ -33,7 +30,6 @@ export const SignUp = () => {
       passwordValue.length >= 6 &&
       passwordValue === confirmPasswordValue
     ) {
-      // dispatch(getUser(emailValue));
       fetch("/users", {
         method: "POST",
         body: JSON.stringify({ name: user, email: emailValue }),
@@ -81,7 +77,7 @@ export const SignUp = () => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label for="email">Email</Label>
+            <Label forHtml="email">Email</Label>
           </div>
           <div>
             <Input
@@ -94,7 +90,7 @@ export const SignUp = () => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label for="password">Password</Label>
+            <Label forHtml="password">Password</Label>
           </div>
           <div>
             <Input
@@ -107,7 +103,7 @@ export const SignUp = () => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label for="password">Confirm Password</Label>
+            <Label forHtml="password">Confirm Password</Label>
           </div>
           <div>
             <Input
