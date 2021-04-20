@@ -194,7 +194,8 @@ const StyledLink = styled(Link)`
   padding-right: 2px;
   padding-left: 2px;
 `;
-//Signed in style-------------------
+//Signed in style--------------------------------------------------------
+
 const WelcomeDashboard = styled.div`
   position: relative;
   width: 90%;
