@@ -30,7 +30,7 @@ function App() {
               <Dashboard />
             </Route>
             <Route exact path="/sowhat">
-              <SoWhat />
+              <SoWhat setFlag={setFlag} flag={flag} />
             </Route>
             <Route exact path="/settings">
               Settings
