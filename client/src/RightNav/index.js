@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiLogIn, FiLogOut, FiBell } from "react-icons/fi";
 import defaultImage from "../Assets/default-img.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getUser } from "../actions";
@@ -81,6 +81,9 @@ const RightNav = ({ flag }) => {
             src={profilePicture === "undefined" ? defaultImage : profilePicture}
             alt="Default User Image"
           />
+          <StyleButtonLink to="/settings">
+            <button>+</button>
+          </StyleButtonLink>
           <h2>{userState.name}</h2>
         </PhotoUser>
         <ReminderWrapper>
@@ -139,12 +142,31 @@ const UserImage = styled.img`
   border: 5px solid #9698d6;
 `;
 const PhotoUser = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  button {
+    position: absolute;
+    border: 2px solid #ff808b;
+    color: #ff808b;
+    background: whitesmoke;
+    right: 10%;
+    top: 65%;
+    border-radius: 50%;
+    :hover {
+      background: #9698d6;
+    }
+    :focus {
+      outline: none;
+    }
+  }
   h2 {
     color: #ff808b;
   }
+`;
+const StyleButtonLink = styled(Link)`
+  color: #ff808b;
 `;
 
 export default RightNav;
