@@ -20,7 +20,6 @@ const LeftNav = () => {
       <Wrapper>
         <LinkWrapper>
           <div>
-            <img />
             <h2>SO!what</h2>
           </div>
           <StyledLink to="/" exact>
@@ -38,7 +37,6 @@ const LeftNav = () => {
       <Wrapper>
         <LinkWrapper>
           <div>
-            <img />
             <h2>SO!what</h2>
           </div>
           <StyledLink to="/" exact>
@@ -69,6 +67,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  padding-top: 10px;
 `;
 const LinkWrapper = styled.div`
   display: flex;

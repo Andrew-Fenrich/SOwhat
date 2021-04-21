@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-const SoWhat = () => {
+const SoWhat = ({ flag, setFlag }) => {
   // Utility variables-----------
   const history = useHistory();
   let userState = useSelector((state) => {
@@ -97,7 +97,7 @@ const SoWhat = () => {
         who: whoIsThisFor,
         what: whatIsThisFor,
         where: whereIsThis,
-        When: whenIsThis,
+        when: whenIsThis,
         why: whyIsThis,
         flag: false,
       }),
@@ -109,6 +109,7 @@ const SoWhat = () => {
       .then((res) => res.json())
       .then((json) => {
         console.log("message:", json);
+        setFlag(!flag);
       });
 
     history.push("/");
@@ -142,7 +143,7 @@ const SoWhat = () => {
               />
             </div>
             <div>
-              <label for="Need Help WHO">Need Some Ideas?</label>
+              <label htmlFor="Need Help WHO">Need Some Ideas?</label>
               <select id="whoFor" name="whoFor" onChange={handleIdeaWhoFor}>
                 <option>Please Select an option</option>
                 {factor.whoFor.map((input) => (
@@ -163,7 +164,7 @@ const SoWhat = () => {
               <strong>SO!</strong>
             </p>
             <div>
-              <label for="What">What would you like to do?</label>
+              <label htmlFor="What">What would you like to do?</label>
               <input
                 type="text"
                 id="What"
@@ -185,7 +186,7 @@ const SoWhat = () => {
               <strong>SO!</strong>
             </p>
             <div>
-              <label for="Where">Where would you like to do this?</label>
+              <label htmlFor="Where">Where would you like to do this?</label>
               <input
                 type="text"
                 id="Where"
@@ -207,7 +208,7 @@ const SoWhat = () => {
               </p>
             </div>
             <div>
-              <label for="When">When must this be acomplished?</label>
+              <label htmlFor="When">When must this be acomplished?</label>
               <input
                 type="text"
                 id="When"
@@ -216,7 +217,7 @@ const SoWhat = () => {
               />
             </div>
             <div>
-              <label for="Need Help WHO">Need Some Ideas?</label>
+              <label htmlFor="Need Help WHO">Need Some Ideas?</label>
               <select id="whenFor" name="whenFor" onChange={handleIdeaWhen}>
                 <option>Please Select an option</option>
                 {factor.time.map((input) => (
@@ -236,7 +237,7 @@ const SoWhat = () => {
               <strong>SO!</strong>
             </p>
             <div>
-              <label for="Why">Why would you like to do this?</label>
+              <label htmlFor="Why">Why would you like to do this?</label>
               <input
                 type="text"
                 id="Why"

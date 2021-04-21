@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FiLogIn, FiLogOut, FiBell } from "react-icons/fi";
 import defaultImage from "../Assets/default-img.png";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getUser, logOut } from "../actions";
+import { getUser } from "../actions";
 
 const RightNav = ({ flag }) => {
+  // utility functions----------
   const dispatch = useDispatch();
-  const [localUser, setLocalUser] = useState(
-    JSON.parse(localStorage.getItem("Current User")) || ""
-  );
 
+  // component variables--------
   let userState = useSelector((state) => {
     return state.user;
   });
+
+  // user's avatar variable: set as variable to swap between default and user uploaded img
   let profilePicture = userState.imgUrl;
-  console.log(profilePicture);
+
+  // log out clears redux store and user state
   const logOutHandler = () => {
     localStorage.removeItem("Current User");
     dispatch(
@@ -31,12 +33,6 @@ const RightNav = ({ flag }) => {
       })
     );
   };
-
-  useEffect(() => {
-    console.log(userState);
-    console.log(localUser);
-    console.log(flag);
-  }, [logOutHandler]);
 
   if (userState.user === "") {
     return (
@@ -70,7 +66,7 @@ const RightNav = ({ flag }) => {
           <h2>{userState.name}</h2>
         </PhotoUser>
         <ContentWrapper>
-          <p>Content</p>
+          <p>content</p>
         </ContentWrapper>
         <ReminderWrapper>
           <Reminder>

@@ -48,7 +48,7 @@ export const SignIn = ({ setFlag, flag }) => {
         }
       });
 
-    return setEmailValue("") && setPasswordValue(""), setFlag(!flag);
+    return setEmailValue("") && setPasswordValue("") && setFlag(!flag);
   };
 
   // focus on input on load
@@ -63,7 +63,7 @@ export const SignIn = ({ setFlag, flag }) => {
         <SectionTitle>Please Sign In</SectionTitle>
         <SectionDiv>
           <div>
-            <Label for="UserName">User Name</Label>
+            <Label forHtml="UserName">User Name</Label>
           </div>
           <div>
             <Input
@@ -77,7 +77,7 @@ export const SignIn = ({ setFlag, flag }) => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label for="email">Email</Label>
+            <Label forHtml="email">Email</Label>
           </div>
           <div>
             <Input
@@ -90,7 +90,7 @@ export const SignIn = ({ setFlag, flag }) => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label for="password">Password</Label>
+            <Label forHtml="password">Password</Label>
           </div>
           <div>
             <Input

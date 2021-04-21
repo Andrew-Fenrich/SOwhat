@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
@@ -27,7 +27,7 @@ function App() {
               <SignUp />
             </Route>
             <Route exact path="/">
-              <Dashboard />
+              <Dashboard setFlag={setFlag} flag={flag} />
             </Route>
             <Route exact path="/sowhat">
               <SoWhat setFlag={setFlag} flag={flag} />
