@@ -13,6 +13,7 @@ const {
   getUserSOwhat,
   deleteSOwhat,
   deleteUser,
+  starSoWhat,
 } = require("./handlers");
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
@@ -87,6 +88,7 @@ express()
   .get("/SOwhat/:userId", getUserSOwhat)
   // endpoint to delete SOwhat
   .delete("/SOwhat/:_id", deleteSOwhat)
+  .patch("/SOwhat/:_id", starSoWhat)
 
   //Catch All Endpoint
   .get("*", (req, res) => {

@@ -125,29 +125,31 @@ const SoWhat = ({ flag, setFlag }) => {
         <WhoBlockStyle id="whoBlock">
           <WhoInputBlock>
             <div>
-              <label for="soWhatName">Give this SO!what a name</label>
+              <label htmlFor="soWhatName">Give this SO!what a name</label>
               <input
                 type="text"
-                id="soWhatName"
+                key="soWhatName"
                 value={soWhatName}
                 onChange={handleSoWhatName}
               />
             </div>
             <div>
-              <label for="Who">Who is this for?</label>
+              <label htmlFor="Who">Who is this for?</label>
               <input
                 type="text"
-                id="whoFor"
+                key="whoFor"
                 value={whoIsThisFor}
                 onChange={handleIdeaWhoFor}
               />
             </div>
             <div>
               <label htmlFor="Need Help WHO">Need Some Ideas?</label>
-              <select id="whoFor" name="whoFor" onChange={handleIdeaWhoFor}>
+              <select key="whoFor" name="whoFor" onChange={handleIdeaWhoFor}>
                 <option>Please Select an option</option>
                 {factor.whoFor.map((input) => (
-                  <option value={input}>{input}</option>
+                  <option key={input} value={input}>
+                    {input}
+                  </option>
                 ))}
               </select>
             </div>
@@ -167,7 +169,7 @@ const SoWhat = ({ flag, setFlag }) => {
               <label htmlFor="What">What would you like to do?</label>
               <input
                 type="text"
-                id="What"
+                key="What"
                 value={whatIsThisFor}
                 onChange={handleIdeaWhatFor}
               />
@@ -189,7 +191,7 @@ const SoWhat = ({ flag, setFlag }) => {
               <label htmlFor="Where">Where would you like to do this?</label>
               <input
                 type="text"
-                id="Where"
+                key="Where"
                 value={whereIsThis}
                 onChange={handleIdeaWhere}
               />
@@ -211,7 +213,7 @@ const SoWhat = ({ flag, setFlag }) => {
               <label htmlFor="When">When must this be acomplished?</label>
               <input
                 type="text"
-                id="When"
+                key="When"
                 value={whenIsThis}
                 onChange={handleIdeaWhen}
               />
@@ -221,7 +223,9 @@ const SoWhat = ({ flag, setFlag }) => {
               <select id="whenFor" name="whenFor" onChange={handleIdeaWhen}>
                 <option>Please Select an option</option>
                 {factor.time.map((input) => (
-                  <option value={input}>{input}</option>
+                  <option key={input} value={input}>
+                    {input}
+                  </option>
                 ))}
               </select>
             </div>
@@ -240,7 +244,7 @@ const SoWhat = ({ flag, setFlag }) => {
               <label htmlFor="Why">Why would you like to do this?</label>
               <input
                 type="text"
-                id="Why"
+                key="Why"
                 value={whyIsThis}
                 onChange={handleIdeaWhy}
               />

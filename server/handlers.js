@@ -59,6 +59,8 @@ const deleteUser = async (req, res) => {
     const query = { email };
     const newValues = { $set: { delete: !user.delete } };
     await db.collection("users").updateOne(query, newValues);
+    client.close();
+    console.log("disconnected!");
     if (user.delete === false) {
       return res.status(202).json({ status: 202, message: "User Deleted" });
     } else {
@@ -169,17 +171,44 @@ const deleteSOwhat = async (req, res) => {
     const db = client.db();
     console.log("connected!");
 
-    const result = await db.collection("SOwhats").findOne({ _id });
+    const result = await db.collection("SOwhats").findOne(ObjectID(_id));
+    console.log(result);
 
     await db.collection("SOwhats").deleteOne(result);
 
     client.close();
     console.log("disconnected!");
 
-    return res.status(204).json({ status: 204, message: "SOwhat Deleted" });
+    return res.status(200).json({ status: 200, message: "SOwhat Deleted" });
   } catch (err) {
     console.log(err.stack);
     res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+};
+// function to patch(star: mark as important) a SOwhat
+const starSoWhat = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  const _id = ObjectID(req.params._id);
+  try {
+    await client.connect();
+    const db = client.db();
+    console.log("connected!");
+    const soWhat = await db.collection("SOwhats").findOne(_id);
+    const query = { _id };
+    const newValues = { $set: { flag: !soWhat.flag } };
+    await db.collection("SOwhats").updateOne(query, newValues);
+    client.close();
+    console.log("disconnected!");
+    if (soWhat.flag === false) {
+      return res.status(202).json({ status: 202, message: "So What Flagged" });
+    } else {
+      return res
+        .status(202)
+        .json({ status: 202, message: "So What DeFlagged" });
+    }
+  } catch (err) {
+    console.log(err.stack);
+    res.status(500).json({ status: 500, message: err.message });
   }
 };
 
@@ -193,4 +222,5 @@ module.exports = {
   getUserSOwhat,
   deleteSOwhat,
   deleteUser,
+  starSoWhat,
 };
