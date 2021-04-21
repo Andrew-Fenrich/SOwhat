@@ -4,28 +4,61 @@ import thinking from "../Assets/undraw_Code_thinking_re_gka2.svg";
 import planning from "../Assets/undraw_Scrum_board_re_wk7v.svg";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const Dashboard = ({ flag, setFlag }) => {
+  // component level state
+  const [userSoWhat, setUserSoWhat] = useState("");
+  const [userReverseArray, setUserReverseArray] = useState("");
+  const [lowerBound, setLowerBound] = useState(0);
+  const [upperBound, setUpperBound] = useState(6);
+
   // component level variables
   let user = useSelector((state) => {
     return state.user;
   });
-  // component level state
-  const [userSoWhat, setUserSoWhat] = useState("");
+  let soWhatLenght = userSoWhat.length;
+  let lastSoWhat = userSoWhat[userSoWhat.length - 1];
+  let maxSoWhat = userReverseArray.slice(lowerBound, upperBound);
+
+  // handler functions---------------
+  const handleOnNext = (ev) => {
+    ev.preventDefault();
+    setLowerBound(lowerBound + 1);
+    setUpperBound(upperBound + 1);
+  };
+  const handleOnPrevious = (ev) => {
+    ev.preventDefault();
+    setLowerBound(lowerBound - 1);
+    setUpperBound(upperBound - 1);
+  };
+  const handleDeleteSoWhat = (ev) => {
+    ev.preventDefault();
+    console.log(ev.target.value);
+    // fetch(`/SOwhat/${ev.target.value}`);
+  };
   //------------useEffect to fetch SO!whats the user has created: triggered by flag for re-render
   useEffect(() => {
-    fetch(`/SOwhat/${user._id}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setUserSoWhat(json.SOwhats);
-      });
+    if (user._id) {
+      fetch(`/SOwhat/${user._id}`)
+        .then((res) => res.json())
+        .then((json) => {
+          setUserSoWhat(json.SOwhats);
+          setUserReverseArray(json.SOwhats.reverse());
+        });
+    } else {
+      console.log("loading");
+    }
   }, [flag, user._id]);
   //-------------console.log block: delete on production-----------------------//
-  console.log("This is the current User in Dashboard:", user);
+  console.log(user);
   console.log(
     "This is the saved state for the user SOwhat in dashboard:",
     userSoWhat
   );
+  console.log("length of sowhat:", soWhatLenght);
+  console.log("last array object:", lastSoWhat);
+  console.log("max length:", maxSoWhat);
   //-------------end of console.log block-------------------------------------//
   if (user.name === "") {
     // this is the welcome dashboard is the user is not signed in-------//
@@ -68,14 +101,11 @@ const Dashboard = ({ flag, setFlag }) => {
         </AboutUs>
       </>
     );
-  } else if (userSoWhat === "") {
+  } else if (maxSoWhat === "") {
     // This is a loading screen to accomodate the fetch for the users so whats
     return <p>loading</p>;
   } else {
     // This is the main signed in dash board
-
-    let lastSoWhat = userSoWhat[userSoWhat.length - 1];
-    console.log(lastSoWhat);
 
     return (
       <>
@@ -113,7 +143,62 @@ const Dashboard = ({ flag, setFlag }) => {
           </LastSoWhatPhotoWrapper>
         </LastSoWhat>
         <OtherInfo>
-          <h2>Div Title</h2>
+          <h2>All SO!whats</h2>
+          <ul>
+            {maxSoWhat.map((input) => {
+              if (input.flag) {
+                return (
+                  <SoWhatLister key={input._id}>
+                    <h3>⭐{input.soWhatName}</h3>
+                    <div>
+                      <p>What? {input.what}</p>
+                      <p>When? {input.when}</p>
+                      <span>
+                        <button>⭐</button>
+                        <button value={input._id} onClick={handleDeleteSoWhat}>
+                          ❌
+                        </button>
+                      </span>
+                    </div>
+                  </SoWhatLister>
+                );
+              } else {
+                return (
+                  <SoWhatLister key={input._id}>
+                    <h3>{input.soWhatName}</h3>
+                    <div>
+                      <p>What? {input.what}</p>
+                      <p>When? {input.when}</p>
+                      <span>
+                        <button>⭐</button>
+                        <button value={input._id} onClick={handleDeleteSoWhat}>
+                          ❌
+                        </button>
+                      </span>
+                    </div>
+                  </SoWhatLister>
+                );
+              }
+            })}
+          </ul>
+          <ButtonWrapper>
+            <div>
+              <button
+                onClick={handleOnPrevious}
+                hidden={lowerBound === 0 ? true : false}
+              >
+                <FiArrowLeft color="white" /> previous
+              </button>
+            </div>
+            <div>
+              <button
+                onClick={handleOnNext}
+                hidden={lowerBound === soWhatLenght - 6 ? true : false}
+              >
+                Next <FiArrowRight color="white" />
+              </button>
+            </div>
+          </ButtonWrapper>
         </OtherInfo>
       </>
     );
@@ -299,8 +384,73 @@ const OtherInfo = styled.div`
   border-radius: 17px;
   h2 {
     color: whitesmoke;
-    padding-left: 10%;
+    padding-left: 5%;
     padding-top: 3%;
+    padding-bottom: 5px;
+    font-size: 20px;
+  }
+  ul {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 0%;
+    height: 100%;
+  }
+`;
+const SoWhatLister = styled.li`
+  position: relative;
+  border: 2px solid whitesmoke;
+  border-radius: 8px;
+  height: 13%;
+  margin-top: 5px;
+  color: whitesmoke;
+  background: #9698d6;
+  h3 {
+    text-align: center;
+  }
+  div {
+    position: relative;
+    padding-left: 10px;
+    padding-bottom: 2px;
+    font-size: 13px;
+  }
+  span {
+    position: absolute;
+    z-index: 20;
+    right: 5px;
+    top: 10px;
+  }
+  button {
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    margin: 2px;
+    :hover {
+      background: #ff808b;
+    }
+    :focus {
+      outline: none;
+    }
+  }
+`;
+const ButtonWrapper = styled.div`
+  position: relative;
+  top: -76px;
+  display: flex;
+  padding-left: 25px;
+  padding-right: 25px;
+  justify-content: space-between;
+  width: 100%;
+  button {
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    :hover {
+      background: #9698d6;
+    }
+    :focus {
+      outline: none;
+    }
   }
 `;
 
