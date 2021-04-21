@@ -8,8 +8,8 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const Dashboard = ({ flag, setFlag }) => {
   // component level state
-  const [userSoWhat, setUserSoWhat] = useState("");
-  const [userReverseArray, setUserReverseArray] = useState("");
+  const [userSoWhat, setUserSoWhat] = useState([]);
+  const [userReverseArray, setUserReverseArray] = useState([]);
   const [lowerBound, setLowerBound] = useState(0);
   const [upperBound, setUpperBound] = useState(6);
 
@@ -18,7 +18,8 @@ const Dashboard = ({ flag, setFlag }) => {
     return state.user;
   });
   let soWhatLenght = userSoWhat.length;
-  let lastSoWhat = userSoWhat[userSoWhat.length - 1];
+  let lastSoWhat =
+    userSoWhat.length === 0 ? userSoWhat[0] : userSoWhat[userSoWhat.length - 1];
   let maxSoWhat = userReverseArray.slice(lowerBound, upperBound);
 
   // handler functions---------------
@@ -67,14 +68,6 @@ const Dashboard = ({ flag, setFlag }) => {
     }
   }, [flag, user._id]);
   //-------------console.log block: delete on production-----------------------//
-  // console.log(user);
-  // console.log(
-  //   "This is the saved state for the user SOwhat in dashboard:",
-  //   userSoWhat
-  // );
-  // console.log("length of sowhat:", soWhatLenght);
-  // console.log("last array object:", lastSoWhat);
-  // console.log("max length:", maxSoWhat);
   //-------------end of console.log block-------------------------------------//
   if (user.name === "") {
     // this is the welcome dashboard is the user is not signed in-------//
@@ -135,23 +128,28 @@ const Dashboard = ({ flag, setFlag }) => {
         </WelcomeDashboard>
         <LastSoWhat>
           <h2>Last SO!what</h2>
-
-          <div>
-            <h3> ❕{lastSoWhat.soWhatName}</h3>
+          <div hidden={lastSoWhat ? true : false}>
             <p>
-              <span>Who:</span> {lastSoWhat.who}
+              You have no SO!whats please make one{" "}
+              <Link to="/sowhat">Here</Link>
+            </p>
+          </div>
+          <div hidden={lastSoWhat ? false : true}>
+            <h3> ❕{lastSoWhat ? lastSoWhat.soWhatName : ""}</h3>
+            <p>
+              <span>Who:</span> {lastSoWhat ? lastSoWhat.who : ""}
             </p>
             <p>
-              <span>What:</span> {lastSoWhat.what}
+              <span>What:</span> {lastSoWhat ? lastSoWhat.what : ""}
             </p>
             <p>
-              <span>Where:</span> {lastSoWhat.where}
+              <span>Where:</span> {lastSoWhat ? lastSoWhat.where : ""}
             </p>
             <p>
-              <span>When:</span> {lastSoWhat.when}
+              <span>When:</span> {lastSoWhat ? lastSoWhat.when : ""}
             </p>
             <p>
-              <span>Why:</span> {lastSoWhat.why}
+              <span>Why:</span> {lastSoWhat ? lastSoWhat.why : ""}
             </p>
           </div>
           <LastSoWhatPhotoWrapper>
