@@ -53,7 +53,6 @@ const Dashboard = ({ flag, setFlag }) => {
           setUserReverseArray([...json.SOwhats.reverse()]);
         });
     } else {
-      console.log("loading");
     }
   }, [flag, user._id]);
   //-------------console.log block: delete on production-----------------------//

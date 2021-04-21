@@ -36,7 +36,6 @@ export const SignIn = ({ setFlag, flag }) => {
           passwordValue.length >= 6 &&
           user.toLowerCase() === activeUser.name.toLowerCase()
         ) {
-          console.log("User Signed In");
           localStorage.removeItem("Current User");
           localStorage.setItem("Current User", JSON.stringify(json.user));
           activeUser = JSON.parse(localStorage.getItem("Current User"));

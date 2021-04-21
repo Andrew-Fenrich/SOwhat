@@ -14,7 +14,6 @@ const LeftNav = () => {
   let user = useSelector((state) => {
     return state.user;
   });
-  console.log("This is the current User in LeftNav:", user);
   if (user.name === "") {
     return (
       <Wrapper>
