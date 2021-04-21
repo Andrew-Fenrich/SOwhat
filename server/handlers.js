@@ -169,14 +169,15 @@ const deleteSOwhat = async (req, res) => {
     const db = client.db();
     console.log("connected!");
 
-    const result = await db.collection("SOwhats").findOne({ _id });
+    const result = await db.collection("SOwhats").findOne(ObjectID(_id));
+    console.log(result);
 
     await db.collection("SOwhats").deleteOne(result);
 
     client.close();
     console.log("disconnected!");
 
-    return res.status(204).json({ status: 204, message: "SOwhat Deleted" });
+    return res.status(200).json({ status: 200, message: "SOwhat Deleted" });
   } catch (err) {
     console.log(err.stack);
     res.status(500).json({ status: 500, data: req.body, message: err.message });

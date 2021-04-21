@@ -34,8 +34,14 @@ const Dashboard = ({ flag, setFlag }) => {
   };
   const handleDeleteSoWhat = (ev) => {
     ev.preventDefault();
-    console.log(ev.target.value);
-    // fetch(`/SOwhat/${ev.target.value}`);
+    fetch(`/SOwhat/${ev.target.value}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        setFlag(!flag);
+      });
   };
   //------------useEffect to fetch SO!whats the user has created: triggered by flag for re-render
   useEffect(() => {
@@ -193,7 +199,11 @@ const Dashboard = ({ flag, setFlag }) => {
             <div>
               <button
                 onClick={handleOnNext}
-                hidden={lowerBound === soWhatLenght - 6 ? true : false}
+                hidden={
+                  lowerBound === soWhatLenght - 6 || userSoWhat.length <= 6
+                    ? true
+                    : false
+                }
               >
                 Next <FiArrowRight color="white" />
               </button>
