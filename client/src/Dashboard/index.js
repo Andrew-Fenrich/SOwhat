@@ -43,6 +43,17 @@ const Dashboard = ({ flag, setFlag }) => {
         setFlag(!flag);
       });
   };
+  const handleStarSoWhat = (ev) => {
+    ev.preventDefault();
+    fetch(`/SOwhat/${ev.target.value}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        setFlag(!flag);
+      });
+  };
   //------------useEffect to fetch SO!whats the user has created: triggered by flag for re-render
   useEffect(() => {
     if (user._id) {
@@ -159,7 +170,9 @@ const Dashboard = ({ flag, setFlag }) => {
                       <p>What? {input.what}</p>
                       <p>When? {input.when}</p>
                       <span>
-                        <button>⭐</button>
+                        <button value={input._id} onClick={handleStarSoWhat}>
+                          ⭐
+                        </button>
                         <button value={input._id} onClick={handleDeleteSoWhat}>
                           ❌
                         </button>
@@ -175,7 +188,9 @@ const Dashboard = ({ flag, setFlag }) => {
                       <p>What? {input.what}</p>
                       <p>When? {input.when}</p>
                       <span>
-                        <button>⭐</button>
+                        <button value={input._id} onClick={handleStarSoWhat}>
+                          ⭐
+                        </button>
                         <button value={input._id} onClick={handleDeleteSoWhat}>
                           ❌
                         </button>
