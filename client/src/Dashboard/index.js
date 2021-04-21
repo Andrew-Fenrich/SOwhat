@@ -43,22 +43,22 @@ const Dashboard = ({ flag, setFlag }) => {
       fetch(`/SOwhat/${user._id}`)
         .then((res) => res.json())
         .then((json) => {
-          setUserSoWhat(json.SOwhats);
-          setUserReverseArray(json.SOwhats.reverse());
+          setUserSoWhat([...json.SOwhats]);
+          setUserReverseArray([...json.SOwhats.reverse()]);
         });
     } else {
       console.log("loading");
     }
   }, [flag, user._id]);
   //-------------console.log block: delete on production-----------------------//
-  console.log(user);
-  console.log(
-    "This is the saved state for the user SOwhat in dashboard:",
-    userSoWhat
-  );
-  console.log("length of sowhat:", soWhatLenght);
-  console.log("last array object:", lastSoWhat);
-  console.log("max length:", maxSoWhat);
+  // console.log(user);
+  // console.log(
+  //   "This is the saved state for the user SOwhat in dashboard:",
+  //   userSoWhat
+  // );
+  // console.log("length of sowhat:", soWhatLenght);
+  // console.log("last array object:", lastSoWhat);
+  // console.log("max length:", maxSoWhat);
   //-------------end of console.log block-------------------------------------//
   if (user.name === "") {
     // this is the welcome dashboard is the user is not signed in-------//
