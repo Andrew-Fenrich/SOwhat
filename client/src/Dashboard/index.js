@@ -22,7 +22,17 @@ const Dashboard = ({ flag, setFlag }) => {
     userSoWhat.length === 0 ? userSoWhat[0] : userSoWhat[userSoWhat.length - 1];
   let maxSoWhat = userReverseArray.slice(lowerBound, upperBound);
 
+  // dependant state-----------
+
+  const [soWhat, setSoWhat] = useState("");
+
   // handler functions---------------
+  const handleSoWhat = (ev) => {
+    console.log(ev.target.value);
+    let value = JSON.parse(ev.target.value);
+    console.log(value);
+    setSoWhat(value);
+  };
   const handleOnNext = (ev) => {
     ev.preventDefault();
     setLowerBound(lowerBound + 1);
@@ -55,6 +65,12 @@ const Dashboard = ({ flag, setFlag }) => {
         setFlag(!flag);
       });
   };
+  //----------Use Effect to set SOwhat----------------//
+  useEffect(() => {
+    if (lastSoWhat !== undefined) {
+      setSoWhat(lastSoWhat);
+    }
+  }, [lastSoWhat]);
   //------------useEffect to fetch SO!whats the user has created: triggered by flag for re-render
   useEffect(() => {
     if (user._id) {
@@ -127,7 +143,7 @@ const Dashboard = ({ flag, setFlag }) => {
           <img src={thinking} alt="Thinking person with laptop" />
         </WelcomeDashboard>
         <LastSoWhat>
-          <h2>Last SO!what</h2>
+          <h2>SO!what</h2>
           <div hidden={lastSoWhat ? true : false}>
             <p>
               You have no SO!whats please make one{" "}
@@ -135,21 +151,21 @@ const Dashboard = ({ flag, setFlag }) => {
             </p>
           </div>
           <div hidden={lastSoWhat ? false : true}>
-            <h3> ❕{lastSoWhat ? lastSoWhat.soWhatName : ""}</h3>
+            <h3> ❕{soWhat.soWhatName ? soWhat.soWhatName : ""}</h3>
             <p>
-              <span>Who:</span> {lastSoWhat ? lastSoWhat.who : ""}
+              <span>Who:</span> {soWhat.who ? soWhat.who : ""}
             </p>
             <p>
-              <span>What:</span> {lastSoWhat ? lastSoWhat.what : ""}
+              <span>What:</span> {soWhat.what ? soWhat.what : ""}
             </p>
             <p>
-              <span>Where:</span> {lastSoWhat ? lastSoWhat.where : ""}
+              <span>Where:</span> {soWhat.where ? soWhat.where : ""}
             </p>
             <p>
-              <span>When:</span> {lastSoWhat ? lastSoWhat.when : ""}
+              <span>When:</span> {soWhat.when ? soWhat.when : ""}
             </p>
             <p>
-              <span>Why:</span> {lastSoWhat ? lastSoWhat.why : ""}
+              <span>Why:</span> {soWhat.why ? soWhat.why : ""}
             </p>
           </div>
           <LastSoWhatPhotoWrapper>
@@ -168,6 +184,12 @@ const Dashboard = ({ flag, setFlag }) => {
                       <p>What? {input.what}</p>
                       <p>When? {input.when}</p>
                       <span>
+                        <button
+                          value={JSON.stringify(input)}
+                          onClick={handleSoWhat}
+                        >
+                          🔍
+                        </button>
                         <button value={input._id} onClick={handleStarSoWhat}>
                           ⭐
                         </button>
@@ -186,6 +208,12 @@ const Dashboard = ({ flag, setFlag }) => {
                       <p>What? {input.what}</p>
                       <p>When? {input.when}</p>
                       <span>
+                        <button
+                          value={JSON.stringify(input)}
+                          onClick={handleSoWhat}
+                        >
+                          🔍
+                        </button>
                         <button value={input._id} onClick={handleStarSoWhat}>
                           ⭐
                         </button>
@@ -420,12 +448,20 @@ const OtherInfo = styled.div`
 `;
 const SoWhatLister = styled.li`
   position: relative;
-  border: 2px solid whitesmoke;
+  border: 3px solid whitesmoke;
   border-radius: 8px;
   height: 13%;
   margin-top: 5px;
   color: whitesmoke;
   background: #9698d6;
+  :hover {
+    background: whitesmoke;
+    border: 3px solid #9698d6;
+    color: #9698d6;
+    h3 {
+      color: #9698d6;
+    }
+  }
   h3 {
     text-align: center;
   }
