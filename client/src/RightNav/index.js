@@ -10,16 +10,19 @@ import { getUser } from "../actions";
 const RightNav = ({ flag }) => {
   // utility functions----------
   const dispatch = useDispatch();
-  // compnent level state
+
+  // compnent level state-------
 
   const [reminder, setReminder] = useState([]);
 
   // component variables--------
 
-  // user info grabbed from REDUX store
+  // user info grabbed from REDUX store----
+
   let userState = useSelector((state) => {
     return state.user;
   });
+
   // user's avatar variable: set as variable to swap between default and user uploaded img
   let profilePicture = userState.imgUrl;
 
@@ -62,7 +65,8 @@ const RightNav = ({ flag }) => {
           </NavLink>
         </LogInOut>
         <PhotoUser>
-          <UserImage src={defaultImage} alt="Default User Image" />
+          {/* Keeping this image here: not 100% if I like look without this image */}
+          {/* <UserImage src={defaultImage} alt="Default User Image" /> */}
         </PhotoUser>
       </Wrapper>
     );

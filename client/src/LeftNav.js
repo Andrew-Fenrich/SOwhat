@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FiHome, FiBookOpen, FiSettings } from "react-icons/fi";
 import masterPlan from "./Assets/undraw_Master_plan_re_jvit.svg";
+import greeting from "./Assets/undraw_social_friends_nsbv.svg";
 
 // variable to assist NavLink styling/finding which link is active
 const activeClassName = "nav-item-active";
@@ -21,13 +22,13 @@ const LeftNav = () => {
           <div>
             <h2>SO!what</h2>
           </div>
-          <StyledLink to="/" exact>
+          {/* <StyledLink to="/" exact>
             <FiHome />
             DashBoard
-          </StyledLink>
+          </StyledLink> */}
         </LinkWrapper>
         <PhotoWrapper>
-          <MasterPlan src={masterPlan} />
+          <MasterPlan src={greeting} />
         </PhotoWrapper>
       </Wrapper>
     );
