@@ -6,14 +6,16 @@ import { NavLink } from "react-router-dom";
 import { getUser } from "./actions";
 
 export const SignIn = ({ setFlag, flag }) => {
-  //Setting State for input fields
+  //component level utilitie functions---------------------------------------
+  const dispatch = useDispatch();
+
+  //component level state----------------------------------------------------
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [user, setUser] = useState("");
   const history = useHistory();
-  const dispatch = useDispatch();
 
-  // handler functions for input fields
+  // handler functions ----------------------------------------------------
   const handleUserName = (ev) => {
     setUser(ev.target.value);
   };
@@ -55,6 +57,9 @@ export const SignIn = ({ setFlag, flag }) => {
   useEffect(() => {
     ref.current.focus();
   }, []);
+
+  //-------------------------------------console.log block delete on production -------------------------------------------//
+  //--------------------------------------end of console.log block --------------------------------------------------------//
 
   return (
     <Wrapper>
@@ -111,6 +116,8 @@ export const SignIn = ({ setFlag, flag }) => {
   );
 };
 
+//--------------------------------styling block-----------------------------------------//
+
 const Wrapper = styled.main`
   display: flex;
   justify-content: center;
@@ -121,7 +128,6 @@ const Wrapper = styled.main`
 
 const Box = styled.form`
   width: 400px;
-  /* box-shadow: 0 5px 5px #000; */
   border: 3px solid #5e81f4;
   border-radius: 8px;
   margin: 20px;

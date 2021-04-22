@@ -11,7 +11,10 @@ import { SignUp } from "./SignUp";
 import Dashboard from "./Dashboard";
 
 function App() {
+  // component level state ------------------------------------------------
   const [flag, setFlag] = useState(false);
+  //---------------------------console.log block delete on production -------------------------//
+  //---------------------------end console.log block ------------------------------------------//
   return (
     <BrowserRouter>
       <GlobalStyles />
@@ -46,6 +49,7 @@ function App() {
   );
 }
 
+//----------------------------styling block -----------------------------------//
 const Wrapper = styled.div`
   display: flex;
   width: 100vw;

@@ -22,15 +22,13 @@ const Dashboard = ({ flag, setFlag }) => {
     userSoWhat.length === 0 ? userSoWhat[0] : userSoWhat[userSoWhat.length - 1];
   let maxSoWhat = userReverseArray.slice(lowerBound, upperBound);
 
-  // dependant state-----------
+  // dependant state----------------
 
   const [soWhat, setSoWhat] = useState("");
 
   // handler functions---------------
   const handleSoWhat = (ev) => {
-    console.log(ev.target.value);
     let value = JSON.parse(ev.target.value);
-    console.log(value);
     setSoWhat(value);
   };
   const handleOnNext = (ev) => {

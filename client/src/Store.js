@@ -1,6 +1,8 @@
 import { createStore } from "redux";
 import reducer from "./reducers";
 
+// creating REDUX store and access to devtools
+
 export default function configureStore(initialState) {
   const store = createStore(
     reducer,

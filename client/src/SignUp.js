@@ -3,12 +3,16 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 
 export const SignUp = () => {
+  //component utility functions
+  const history = useHistory();
+
+  //componnent level state-------------------------------------------------
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
   const [user, setUser] = useState("");
-  const history = useHistory();
 
+  // handler functions----------------------------------------------------
   const handleUserName = (ev) => {
     setUser(ev.target.value);
   };
@@ -57,13 +61,16 @@ export const SignUp = () => {
     ref.current.focus();
   }, []);
 
+  //--------------console.log block delete contents on production----------------//
+  //----------------------end of console.log block-------------------------------//
+
   return (
     <Wrapper>
       <Box>
         <SectionTitle>Please Sign Up</SectionTitle>
         <SectionDiv>
           <div>
-            <Label for="UserName">User Name</Label>
+            <Label htmlFor="UserName">User Name</Label>
           </div>
           <div>
             <Input
@@ -77,7 +84,7 @@ export const SignUp = () => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label forHtml="email">Email</Label>
+            <Label htmlFor="email">Email</Label>
           </div>
           <div>
             <Input
@@ -90,7 +97,7 @@ export const SignUp = () => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label forHtml="password">Password</Label>
+            <Label htmlFor="password">Password</Label>
           </div>
           <div>
             <Input
@@ -103,7 +110,7 @@ export const SignUp = () => {
         </SectionDiv>
         <SectionDiv>
           <div>
-            <Label forHtml="password">Confirm Password</Label>
+            <Label htmlFor="password">Confirm Password</Label>
           </div>
           <div>
             <Input
@@ -122,6 +129,7 @@ export const SignUp = () => {
   );
 };
 
+//-------------------------------------styling block------------------------------------------//
 const Wrapper = styled.main`
   display: flex;
   justify-content: center;

@@ -10,11 +10,14 @@ import greeting from "./Assets/undraw_social_friends_nsbv.svg";
 // variable to assist NavLink styling/finding which link is active
 const activeClassName = "nav-item-active";
 
-//Component
 const LeftNav = () => {
+  // component level variable---------------------------
   let user = useSelector((state) => {
     return state.user;
   });
+
+  //------------------------------console.log block delete on production ---------------------//
+  //------------------------------end of console log block------------------------------------//
   if (user.name === "") {
     return (
       <Wrapper>
@@ -60,7 +63,7 @@ const LeftNav = () => {
   }
 };
 
-//Styling
+//--------------------------------Styling block---------------------------------------//
 
 const Wrapper = styled.div`
   display: flex;
