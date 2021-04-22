@@ -5,6 +5,7 @@ import GlobalStyles from "./GlobalStyles";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
 import SoWhat from "./SoWhat";
+import Settings from "./Settings";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 import Dashboard from "./Dashboard";
@@ -33,7 +34,7 @@ function App() {
               <SoWhat setFlag={setFlag} flag={flag} />
             </Route>
             <Route exact path="/settings">
-              Settings
+              <Settings setFlag={setFlag} flag={flag} />
             </Route>
           </SwitchWrapper>
         </Switch>

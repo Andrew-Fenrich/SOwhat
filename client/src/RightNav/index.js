@@ -50,7 +50,6 @@ const RightNav = ({ flag }) => {
     }
   }, [flag, userState._id]);
   //--------------------------Console.log block delete on production-------------------------//
-  console.log("user state in useEffect rightNavBar:", reminder);
   //----------------------------------End Console log block----------------------------------//
 
   if (userState.user === "") {
@@ -94,7 +93,13 @@ const RightNav = ({ flag }) => {
           <ul>
             {reminder.map((input) => {
               if (input.flag) {
-                return <li key={input._id}>⭐{input.soWhatName}</li>;
+                return (
+                  <li key={input._id} value={input.soWhatName}>
+                    ⭐{input.soWhatName}
+                  </li>
+                );
+              } else {
+                return null;
               }
             })}
           </ul>
