@@ -1,8 +1,8 @@
 # SOwhat
 
-My Final Project for CB-WD-6
+## Project Description
 
-This application attempts to answer the age old question? SO!what
+My Final Project for CB-WD-6
 
 Sign-in Page
 
@@ -11,7 +11,6 @@ Sign-in Page
 Main Dashboard
 
 ![image](https://user-images.githubusercontent.com/77979565/115941096-fbeff980-a471-11eb-80dd-5916afa7a02b.png)
-
 
 So What Dashboard
 
