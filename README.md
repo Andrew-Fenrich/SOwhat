@@ -2,8 +2,7 @@
 
 ## Project Description
 
-So!what was the created as my Final Project for CB-WD-6. It is a productivity tool which aims to apply an
-indepth factor analysis in an easy to use and intuitive process. It aims to help users create meaningful tasks and
+So!what is a productivity tool which aims to apply an indepth factor analysis in an easy to use and intuitive process. It aims to help users create meaningful tasks and
 in the future to provide a suit of tools to help enhance the execution of said tasks.
 
 ### Sign-in Page
