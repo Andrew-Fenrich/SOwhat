@@ -23,7 +23,7 @@ in the future to provide a suit of tools to help enhance the execution of said t
 
 ## Future project goals
 
-    -[x] add current photos to portfolio site
+    -[X] add current photos to portfolio site
     -[] create development roadmap
     -[] improve SO!what creation logic and flow
     -[] plan and impliment the next major feature "Deep Dive"
