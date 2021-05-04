@@ -22,7 +22,7 @@ in the future to provide a suit of tools to help enhance the execution of said t
 ![image](https://user-images.githubusercontent.com/77979565/115941116-132ee700-a472-11eb-8053-533955c74256.png)
 
 ## Future project goals
-
+*
       *[x] add current photos to portfolio site
       *[] create development roadmap
       *[] improve SO!what creation logic and flow
